@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %}Gamma SE - Found {{ total }} results{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style>
+        .logo {
+            margin-left: 10px;
+        }
+
+        .form {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+        <nav class="white" role="navigation">
+        <div class="nav-wrapper container">
+           <div class="row">
+     <form action="{{ url_for('.get_search') }}">
+    <div class="col s10">
+      <div class="row">
+        <div class="input-field col s12">
+                <input type="text" id="autocomplete-input" class="autocomplete" aria-label="{{exmp}}" name="s">
+                <label for="autocomplete-input">Find something here!</label>
+        </div>
+      </div>
+    </div>
+    <div class="col s2">
+    <button class="btn-floating btn-large waves-effect waves-light red" id="search-button" type="submit"><i class="material-icons">send</i></button>
+    </div>
+    </form>
+  </div>
+        </div>
+      </nav>
+    <br>
+    <br>
+    <div id="cnt">
+    <div class="container" id="results">
+        <div class="row"></div>
+        {% for item in results %}
+            <p class="lead"><a href="{{ url_for('.redir', url=item[1], r=r_name) }}">{{ item[0] }}</a><br>
+                {% for word in item[2].split() %}
+                    {% if word == item[3] %}
+                        <b>{{ word }}</b>
+                    {% else %}
+                        {{ word }}
+                    {% endif %}
+                {% endfor %}
+            </p>
+            <div class="w-100"></div>
+        {% endfor %}
+    </div>
+    </div>
+    <div class="container">
+
+        <p>
+            <small>Found {{ total }} results by request «{{ r_name }}» for {{ time }} seconds (time without snippet gen)
+            </small>
+        </p>
+    </div>
+    <div align="center">
+            <ul class="pagination">
+                {% if active_page > 1 %}
+                <li class="waves-effect">
+                    <a class="page-link" href="{{ url_for('.get_search', s=r_name, p=active_page - 1) }}"><i class="material-icons">chevron_left</i></a>
+                </li>
+                {% else %}
+                <li class="disabled">
+                    <a class="page-link"><i class="material-icons">chevron_left</i></a>
+                </li>
+                {%  endif %}
+                {% for i in range(1, pages + 1) %}
+                    <li class="waves-effect {% if i == active_page %} active {% endif %}"><a class="page-link"
+                                                                                          href="{{ url_for('.get_search', s=r_name, p=i) }}">{{ i }}</a>
+                    </li>
+                {% endfor %}
+                {% if active_page < pages %}
+                    <li class="waves-effect">
+                        <a class="page-link" href="{{ url_for('.get_search', s=r_name, p=active_page + 1) }}"><i class="material-icons">chevron_right</i></a>
+                    </li>
+                {% else %}
+                <li class="disabled">
+                    <a class="page-link"><i class="material-icons">chevron_right</i></a>
+                </li>
+                {%  endif %}
+            </ul>
+    </div>
+{% endblock %}
+{% block js %}
+    {{ super() }}
+    <script>
+    betalarm();
+    searchbox();
+    pageres_preloader();
+    </script>
+{% endblock %}

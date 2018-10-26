@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Alpha Gate{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style>
+        @font-face {
+            font-family: Frutiger;
+            src: url("{{ url_for('.static', filename='frutiger.otf') }}");
+        }
+
+        body {
+            background: url("{{ url_for('.static', filename='img/metal.jpg') }}");
+        }
+
+        .display-0 {
+            font-family: Frutiger;
+            font-size: 180pt;
+            color: white;
+        }
+
+        .display-01 {
+            font-family: Frutiger;
+            font-size: 140pt;
+            color: white;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <h1 align="right" class="display-0">Alpha</h1>
+    <h2 align="right" class="display-01">Gate</h2><br>
+    <br><br><br>
+{% endblock %}

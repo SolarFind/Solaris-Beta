@@ -1,0 +1,19 @@
+<html>
+<body>
+    <div class="container">
+        <div class="row"></div>
+        {% for item in results %}
+            <p class="lead"><a href="{{ url_for('.redir', url=item[1], r=r_name) }}">{{ item[0] }}</a><br>
+                {% for word in item[2].split() %}
+                    {% if word == item[3] %}
+                        <b>{{ word }}</b>
+                    {% else %}
+                        {{ word }}
+                    {% endif %}
+                {% endfor %}
+            </p>
+            <div class="w-100"></div>
+        {% endfor %}
+    </div>
+</body>
+</html>

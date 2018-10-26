@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Beta Weather{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style>
+        body {
+            background: url("{{ url_for('.static', filename='img/' + status_img) }}");
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <h4 align="center" class="display-4">Beta Weather</h4>
+    <br><br><br>
+    <h1 class="display-1" align="center">{{temp}}°C</h1>
+    <h2 class="display-2" align="center">{{status}}</h2>
+    <div class="container" align="center">
+        <div class="row">
+            <br>
+            <div class="col-sm">
+                <div class="p-3 mb-2 bg-white">
+                    <p class="font-weight-light">Tomorrow</p>
+                    <h1 class="display-3">{{ndata[0]}}°C</h1>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="p-3 mb-2 bg-white">
+                    <p class="font-weight-light">Day after tomorrow</p>
+                    <h1 class="display-3">{{ndata[1]}}°C</h1>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="p-3 mb-2 bg-white">
+                    <p class="font-weight-light">Second day after tomorrow</p>
+                    <h1 class="display-3">{{ndata[2]}}°C</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

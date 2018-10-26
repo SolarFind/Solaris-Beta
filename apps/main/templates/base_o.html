@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+      <meta name="theme-color" content="#51007a"/>
+      <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('.static', filename='img/icons/apple-touch-icon.png') }}">
+      <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('.static', filename='img/icons/favicon-32x32.png') }}">
+      <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('.static', filename='img/icons/favicon-16x16.png') }}">
+      <link rel="mask-icon" href="{{ url_for('.static', filename='img/icons/safari-pinned-tab.svg') }}" color="#5bbad5">
+      <meta name="msapplication-TileColor" content="#603cba">
+      <meta name="theme-color" content="#ffffff">
+      <link rel="manifest" href="{{ url_for('.static', filename='manifest.json') }}">
+    <title>SolarFind SE</title>
+  
+    <!-- CSS  -->
+  
+    <style>
+      /* fallback */
+  @font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url({{ url_for('.static', filename='fonts/MatIcons.woff2') }}) format('woff2');
+  }
+  
+  .material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+  }
+    </style>
+    <link href="{{ url_for('.static', filename='css/materialize.css') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="{{ url_for('.static', filename='css/style.css') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="{{ url_for('.static', filename='css/typeconf.css') }}" type="text/css" rel="stylesheet">
+    {% endblock %}
+</head>
+<body>
+    <nav class="white" role="navigation">
+        <div class="nav-wrapper container">
+          <a id="logo-container" href="/" class="brand-logo">SolarFind</a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="/betar">Register for beta testing!</a></li>
+            <li><a onclick="turn_day()"><i class="material-icons">brightness_low</i></a></li>
+            <li><a onclick="turn_moon()"><i class="material-icons">brightness_3</i></a></li>
+          </ul>
+    
+          <ul id="nav-mobile" class="sidenav">
+            <li><a href="betar">Register for beta testing!</a></li>
+            <li><a onclick="turn_day()"><i class="material-icons">brightness_low</i></a></li>
+            <li><a onclick="turn_moon()"><i class="material-icons">brightness_3</i></a></li>
+          </ul>
+          <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        </div>
+      </nav>
+    
+      {% block content %}
+      {% endblock %}
+    
+
+    <footer class="page-footer teal">
+        <div class="container">
+          <div class="row">
+            <div class="col l6 s12">
+              <h5 class="white-text">Company Bio</h5>
+              <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job.</p>
+    
+    
+            </div>
+            <div class="col l3 s12">
+              <h5 class="white-text">Settings</h5>
+              <ul>
+                <li><a class="white-text" href="#!">Link 1</a></li>
+                <li><a class="white-text" href="#!">Link 2</a></li>
+                <li><a class="white-text" href="#!">Link 3</a></li>
+                <li><a class="white-text" href="#!">Link 4</a></li>
+              </ul>
+            </div>
+            <div class="col l3 s12">
+              <h5 class="white-text">Connect</h5>
+              <ul>
+                <li><a class="white-text" href="#!">Link 1</a></li>
+                <li><a class="white-text" href="#!">Link 2</a></li>
+                <li><a class="white-text" href="#!">Link 3</a></li>
+                <li><a class="white-text" href="#!">Link 4</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer-copyright">
+          <div class="container">
+          Made with CSS Framework <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>.
+          </div>
+    
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                Made with <a class="brown-text text-lighten-3" href="http://python.org">Python</a>.
+            </div>
+      
+          </div>
+          <div class="footer-copyright">
+              <div class="container">
+                  Made with <a class="brown-text text-lighten-3" href="/liblist">this</a> awesome libraries!
+              </div>
+        
+            </div>
+      </footer>
+    
+    
+
+<!--<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">Alpha Gate</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbar1"
+            aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse navbar-light" id="navbar1">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('main.search_index') }}">Gamma Search<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('weather.get_weather') }}">Beta Weather</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">All services</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                    <a class="dropdown-item" href="{{ url_for('news.get_news') }}">Project News</a>
+                    <a class="dropdown-item" href="/about">About</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="https://github.com/AlphaSearch/Alpha_A">Github page</a>
+                </div>
+            </li>
+            <li>
+                <button class="btn btn-outline-info my-2 my-sm-0" onclick="notifyMe()">Subscribe</button>
+            </li>
+        </ul>
+
+        <div class="dropdown">
+                <a href="#" role="button" id="user_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="{{ url_for('main.static', filename='img/i8-user.png') if current_user.role != 'admin' else url_for('main.static', filename='img/i8-admin.png')}}" alt="User Icon">
+                </a>
+                {%- if current_user.get_id() is none -%}
+                <div class="dropdown-menu" aria-labelledby="user_dropdown">
+                    <form action="/login" class="px-4 py-3" method="POST">
+                      <div class="form-group">
+                        <label for="exampleDropdownFormEmail1">Username</label>
+                        <input type="text" class="form-control" id="exampleDropdownFormEmail1" placeholder="Username" name="username">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleDropdownFormPassword1">Password</label>
+                        <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password" name="password">
+                      </div>
+                      <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                        <label class="form-check-label" for="dropdownCheck">
+                          Remember me
+                        </label>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Sign in</button>
+                    </form>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/register">New around here? Sign up</a>
+                    <a class="dropdown-item" href="/forgot">Forgot password?</a>
+                  </div>
+                  {% else %}
+                  <div class="dropdown-menu" aria-labelledby="user_dropdown">
+                        <a class="dropdown-item" href="/logout">Logout</a>
+                        {%- if current_user.role == "admin" -%}
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/admin">Admin Panel</a>
+                        {% endif %}
+                      </div>
+                  {% endif %}
+            </div>
+            &MediumSpace;&MediumSpace;
+        <form class="form-inline my-2 my-lg-0" action="{{ url_for('main.get_search') }}">
+            <input name="s" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        &MediumSpace;&MediumSpace;
+    </div>
+</nav>-->
+
+{% block js %}
+<script src="{{ url_for('.static', filename='js/jquery.min.js') }}"></script>
+  <script src="{{ url_for('.static', filename='js/typed.js') }}" type="text/javascript"></script>
+  <script src="{{ url_for('.static', filename='js/materialize.js') }}"></script>
+  <script src="{{ url_for('.static', filename='js/init.js') }}"></script>
+  <script src="{{ url_for('.static', filename='js/sweetalert.min.js') }}"></script>
+  <script src="{{ url_for('.static', filename='js/solaris.js') }}"></script>
+  
+  <script>
+    if (navigator.serviceWorker.controller) {
+      console.log('[SWORK] active service worker found, no need to register')
+    } else {
+      //Register the ServiceWorker
+      navigator.serviceWorker.register('sw.js', {
+        scope: './'
+      }).then(function(reg) {
+        console.log('Service worker has been registered for scope:'+ reg.scope);
+      });
+    }
+    
+    </script>
+{% endblock %}
+{% block requires %}
+
+{% endblock %}
+</body>
+</html>

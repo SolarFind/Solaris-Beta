@@ -1,0 +1,22 @@
+{"short_name" : "SolarFind",
+  "name" : "SolarFind! - Bringing stars for you",
+  "start_url" : "https://dangsun.github.io/SolarisUI/index.html",
+  "background_color" : "#000",
+  "theme_color" : "#51007a",
+  "display" : "standalone",
+  "lang" : "",
+  "description" : "The modern Search Engine based on Material Design",
+  "orientation" : "undefined",
+  "icons": [
+    {
+      "src": "img/icons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "img/icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
