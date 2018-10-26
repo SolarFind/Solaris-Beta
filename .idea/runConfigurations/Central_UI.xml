@@ -1,0 +1,20 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Central UI" type="Python.FlaskServer" factoryName="Flask server" singleton="true">
+    <option name="additionalOptions" value="" />
+    <option name="application" value="" />
+    <option name="flaskDebug" value="true" />
+    <module name="Solaris-Beta" />
+    <option name="target" value="$PROJECT_DIR$/manage.py" />
+    <option name="targetType" value="PATH" />
+    <option name="INTERPRETER_OPTIONS" value="" />
+    <option name="PARENT_ENVS" value="true" />
+    <option name="SDK_HOME" value="/usr/local/bin/python3.7" />
+    <option name="WORKING_DIRECTORY" value="" />
+    <option name="IS_MODULE_SDK" value="false" />
+    <option name="ADD_CONTENT_ROOTS" value="true" />
+    <option name="ADD_SOURCE_ROOTS" value="true" />
+    <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+    <option name="launchJavascriptDebuger" value="false" />
+    <method v="2" />
+  </configuration>
+</component>
