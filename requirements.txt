@@ -4,3 +4,4 @@ flask-admin
 flask-monitoringdashboard
 flask-login
 flask-sqlalchemy
+requests
