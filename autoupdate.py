@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route("/gh", methods=["POST"])
 def gh():
-    mydata = json.loads(request.data)
+    mydata = json.loads(request.data.encode())
     print(json.dumps(mydata, indent=4))
     return "OK"
 
