@@ -1,11 +1,13 @@
 from flask import *
-from pprint import pprint
+import json
+
 from os import environ
 app = Flask(__name__)
 
 @app.route("/gh", methods=["POST"])
 def gh():
-    pprint(request.data)
+    mydata = json.loads(request.data)
+    print(json.dumps(mydata, indent=4))
     return "OK"
 
 if __name__ == "__main__":
