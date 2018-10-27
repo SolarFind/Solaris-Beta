@@ -1,3 +1,7 @@
+// INIT Block {
+$(".dropdown-trigger").dropdown({constrainWidth: false,  belowOrigin: true });
+// }
+
 function notifyMe() {
   // Проверка поддержки браузером уведомлений
   if (!("Notification" in window)) {
@@ -54,7 +58,7 @@ function RecognizeRU(){
 
 // Начинаем слушать микрофон и распознавать голос
 setTimeout(function(){
-console.log("Поехали!")    
+console.log("Поехали!");
 recognizer.start();}, 3000);
 
 }
@@ -64,7 +68,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
               lat = position.coords.latitude;
               long = position.coords.longitude;
               console.log("Latitude: "+lat);
-              console.log("Longitude: "+long)
+              console.log("Longitude: "+long);
               document.cookie = "lat="+lat;
               document.cookie = "long="+long;
 

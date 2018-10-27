@@ -44,6 +44,7 @@
     <link href="/static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="/static/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="/static/css/typeconf.css" type="text/css" rel="stylesheet">
+
     {% endblock %}
 </head>
 <body>
@@ -55,8 +56,8 @@
             <li><a onclick="turn_day()"><i class="material-icons">brightness_low</i></a></li>
             <li><a onclick="turn_moon()"><i class="material-icons">brightness_3</i></a></li>
             <li>
-                        <li>
-             <a class="dropdown-trigger" href="#!" data-target="dropdown1">
+              <li>
+             <a class="dropdown-trigger" href="#" data-beloworigin="true" data-target="dropdown1">
                 {% if current_user.role != 'admin' %}
                 <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                     <path fill="#6200ff" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
@@ -68,33 +69,9 @@
                  {% endif %}
             </a>
             </li>
-          </ul>
-
-          <ul id="nav-mobile" class="sidenav">
-            <li><a href="betar">Register for beta testing!</a></li>
-            <li><a onclick="turn_day()"><i class="material-icons">brightness_low</i></a></li>
-            <li><a onclick="turn_moon()"><i class="material-icons">brightness_3</i></a></li>
-            <li>
-             <a class="dropdown-trigger" href="#!" data-target="dropdown1">
-                {% if current_user.role != 'admin' %}
-                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                    <path fill="#6200ff" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
-                </svg>
-                {% else %}
-                 <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                     <path fill="#6200ff" d="M12,3L2,12H5V20H19V12H22L12,3M12,8.75A2.25,2.25 0 0,1 14.25,11A2.25,2.25 0 0,1 12,13.25A2.25,2.25 0 0,1 9.75,11A2.25,2.25 0 0,1 12,8.75M12,15C13.5,15 16.5,15.75 16.5,17.25V18H7.5V17.25C7.5,15.75 10.5,15 12,15Z" />
-                </svg>
-                 {% endif %}
-            </a>
-            </li>
-          </ul>
-          <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        </div>
-      </nav>
-
-
-               {%- if current_user.get_id() is none -%}
+                         {%- if current_user.get_id() is none -%}
           <ul id="dropdown1" class="dropdown-content">
+          <div style="margin: 10%;">
                     <form action="/login" class="px-4 py-3" method="POST">
                       <div class="form-group">
                         <label for="exampleDropdownFormEmail1">Username</label>
@@ -113,7 +90,8 @@
                       <button type="submit" class="btn btn-primary">Sign in</button>
                     </form>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/register">New around here? Sign up</a>
+              <a class="dropdown-item" href="/register">Sign up</a>
+          </div>
           </ul>
          {% else %}
           <ul id="dropdown1" class="dropdown-content">
@@ -124,6 +102,19 @@
                         {% endif %}
           </ul>
           {% endif %}
+          </ul>
+
+          <ul id="nav-mobile" class="sidenav">
+            <li><a href="betar">Register for beta testing!</a></li>
+            <li><a onclick="turn_day()"><i class="material-icons">brightness_low</i></a></li>
+            <li><a onclick="turn_moon()"><i class="material-icons">brightness_3</i></a></li>
+          </ul>
+          <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        </div>
+      </nav>
+
+
+
 
 
       {% block content %}
@@ -277,7 +268,7 @@
         console.log('Service worker has been registered for scope:'+ reg.scope);
       });
     }}catch (e) {
-      
+
   }
 
     </script>-->
