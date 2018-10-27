@@ -2,7 +2,7 @@ from flask import *
 from os import environ
 app = Flask(__name__)
 
-@app.route("/gh")
+@app.route("/gh", methods=["POST"])
 def gh():
     print(request.data)
 
