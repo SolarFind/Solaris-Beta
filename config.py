@@ -10,3 +10,4 @@ class Configuration(object):
     #SQLALCHEMY_POOL_RECYCLE = 280
 
 BACK_URL = 'http://solarfind.net:8121'
+#AUP Test
