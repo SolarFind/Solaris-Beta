@@ -7,33 +7,28 @@
             margin-left: 10px;
         }
 
-        .form {
-            display: flex;
-            align-items: center;
+        .dform {
+           margin-left: 3%; /* Отступы вокруг элемента */
+           margin-right: 4%; /* Отступы вокруг элемента */
         }
     </style>
 {% endblock %}
 
 {% block content %}
-        <nav class="white" role="navigation">
-        <div class="nav-wrapper container">
-           <div class="row">
-     <form action="{{ url_for('.get_search') }}">
+    <div align="center" class="container">
+    <form action="{{ url_for('.get_search') }}">
     <div class="col s10">
       <div class="row">
         <div class="input-field col s12">
                 <input type="text" id="autocomplete-input" class="autocomplete" aria-label="{{exmp}}" name="s">
                 <label for="autocomplete-input">Find something here!</label>
+                <button class="btn-floating btn-medium waves-effect waves-light red" id="search-button" type="submit"><i class="material-icons">send</i></button>
+
         </div>
       </div>
     </div>
-    <div class="col s2">
-    <button class="btn-floating btn-large waves-effect waves-light red" id="search-button" type="submit"><i class="material-icons">send</i></button>
-    </div>
     </form>
-  </div>
-        </div>
-      </nav>
+    </div>
     <br>
     <br>
     <div id="cnt">

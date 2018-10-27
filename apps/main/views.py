@@ -44,9 +44,15 @@ def redir():
 @main.route('/search')
 def get_search():
     try:
-        res = requests.get(BACK_URL + "/search?s={0}&p={1}".format(request.args.get('s'),
+        sw = request.args.get('s')
+        if sw[-1:]==" ":
+            print("+")
+            sw=sw[:-1]
+        res = requests.get(BACK_URL + "/search?s={0}&p={1}".format(sw,
                                                                               request.args.get('p', default=1,
-                                                                                               type=int))).json()
+                                                                                               type=int)))
+        res = res.json()
+        #print(res)
         exmp = requests.get(BACK_URL + "/example").text
     except requests.exceptions.ConnectionError:
         res = {'time': 0.0, 'total': 0, 'data': [["Conn error", "", "Sorry! We have connection error!"]]}
