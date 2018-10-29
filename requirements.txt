@@ -5,3 +5,4 @@ flask-monitoringdashboard
 flask-login
 flask-sqlalchemy
 requests
+mmh3

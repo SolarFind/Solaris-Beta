@@ -2,7 +2,7 @@ from flask import *
 #from raven.contrib.flask  import Sentry
 from config import Configuration
 from flask_login import LoginManager, login_user , logout_user , current_user , login_required
-
+from random import randint
 #from apps.akadoton.views import akadoton
 
 import sys
@@ -12,7 +12,7 @@ import flask_admin as fadmin
 from flask_admin.contrib import sqla
 from flask_admin.contrib.sqla import filters
 import flask_monitoringdashboard as dashboard
-
+from hashlib import sha3_512 as hash512
 sys.path.append('/Alpha_1/UI_Flask/pycharm-debug-py3k.egg')
 
 app = Flask(__name__, static_folder=None, template_folder="templates")
@@ -27,15 +27,16 @@ class User(db.Model):
     id = db.Column('user_id',db.Integer , primary_key=True)
     username = db.Column('username', db.String(20), unique=True , index=True)
     name = db.Column('name', db.String(50), unique=True , index=True)
-    password = db.Column('password' , db.String(64))
+    password = db.Column('password' , db.String(256))
     email = db.Column('email',db.String(50),unique=True , index=True)
     registered_on = db.Column('registered_on' , db.DateTime)
+    seed = db.Column('seed', db.Integer)
     role = db.Column('role' , db.String(15))
     addr1 = db.Column('addr1' , db.String(30))
     addr = db.Column('addr' , db.String(150))
     city = db.Column('city' , db.String(30))
  
-    def __init__(self , username, password, email, addr="", addr1="", city="", role = "user", name = "User"):
+    def __init__(self , username, password, email, addr="", addr1="", city="", role = "user", name = "User", seed=0):
         self.username = username
         self.password = password
         self.email = email
@@ -43,6 +44,7 @@ class User(db.Model):
         self.registered_on = datetime.utcnow()
         self.name = name
         self.addr = addr
+        self.seed = seed
         self.addr1 = addr1
         self.city = city
         db.create_all()
@@ -84,7 +86,7 @@ class UserAdmin(sqla.ModelView):
 
 class LoggedUser(db.Model):
     __tablename__ = "logs"
-    uuid = db.Column('uuid', db.Integer)
+    uuid = db.Column('uuid', db.BigInteger)
     useragent = db.Column('ua', db.String(140))
     ip = db.Column('ip', db.String(32))
     time_reg = db.Column('registered_on' , db.String(100), primary_key=True)
@@ -172,14 +174,14 @@ def db_logger():
 def register():
     if request.method == 'GET':
         return render_template('register.html')
+    seed=0
     user = User(request.form['username'],
-     request.form['password'],
+     hash512(request.form['password'].encode()).hexdigest(),
      request.form['email'],
      name=request.form['name']+" "+request.form['surname'], 
      addr=request.form['addr'], 
      addr1 = request.form['addr1'], 
-     city=request.form['city'])
-    
+     city=request.form['city'], seed=0)
     db.session.add(user)
     db.session.commit()
     flash('User successfully registered')
@@ -195,7 +197,7 @@ def login():
            return render_template('login.html', nsi=False)
     print(request.form)
     username = request.form['username']
-    password = request.form['password']
+    password = hash512(request.form['password'].encode()).hexdigest()
     registered_user = User.query.filter_by(username=username,password=password).first()
     print(registered_user)
     if registered_user is None:

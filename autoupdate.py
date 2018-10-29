@@ -10,6 +10,7 @@ def gh():
     print(json.dumps(mydata, indent=4))
     if mydata["ref"] == "refs/heads/master":
         system("git pull origin master")
+        system("uwsgi --reload /SolarFind/PUI.pid")
     return "OK"
 
 if __name__ == "__main__":
