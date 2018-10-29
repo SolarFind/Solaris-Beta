@@ -16,7 +16,7 @@ def gh():
     return "OK"
 
 @app.route("/aup_restart")
-def aup(): execv(sys.executable, ['python'] + sys.argv)
+def aup(): execv(sys.executable, ['python3'] + sys.argv)
 
 if __name__ == "__main__":
     app.run("0.0.0.0", environ["AUP_PORT"])
