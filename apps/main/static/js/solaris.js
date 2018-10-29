@@ -114,7 +114,7 @@ function searchbox() {
         console.log("y", y);
         y.oninput = function () {
             instance.open();};
-        $.getJSON("http://solarfind.net:8121/aucomp", function (valo) {
+        $.getJSON("https://solarfind.net/aucomp", function (valo) {
         res = {};
         valo.forEach(function (va) {
            res[va]=null;

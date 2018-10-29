@@ -31,6 +31,9 @@ def search_index():
         exmp = "Backend server does not working"
     return render_template('index.html', loc=loc, exmp=exmp)
 
+@main.route("/aucomp")
+def auto_proxy():
+    return jsonify(requests.get("http://solarfind.net:8121/aucomp").json())
 
 @main.route('/redirect')
 def redir():
