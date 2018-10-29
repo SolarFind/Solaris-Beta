@@ -12,7 +12,7 @@ import flask_admin as fadmin
 from flask_admin.contrib import sqla
 from flask_admin.contrib.sqla import filters
 import flask_monitoringdashboard as dashboard
-from hashlib import sha3_512 as hash512
+from password_hashing import create_hash, validate_password
 sys.path.append('/Alpha_1/UI_Flask/pycharm-debug-py3k.egg')
 
 app = Flask(__name__, static_folder=None, template_folder="templates")
@@ -176,7 +176,7 @@ def register():
         return render_template('register.html')
     seed=0
     user = User(request.form['username'],
-     hash512(request.form['password'].encode()).hexdigest(),
+     create_hash(request.form['password']),
      request.form['email'],
      name=request.form['name']+" "+request.form['surname'], 
      addr=request.form['addr'], 
@@ -197,10 +197,13 @@ def login():
            return render_template('login.html', nsi=False)
     print(request.form)
     username = request.form['username']
-    password = hash512(request.form['password'].encode()).hexdigest()
-    registered_user = User.query.filter_by(username=username,password=password).first()
-    print(registered_user)
-    if registered_user is None:
+    password = request.form['password']
+    registered_user = User.query.filter_by(username=username).first()
+    try:
+      pvl = validate_password(request.form['password'], registered_user.password)
+    except AttributeError:
+      pvl = False
+    if registered_user is None or not pvl:
         print('Username or Password is invalid' , 'error')
         return redirect(url_for('login')+"?nsi=1")
     print(registered_user.role)
@@ -209,13 +212,13 @@ def login():
     if registered_user.role == "admin":
        resp = make_response(redirect(url_for('myadmin.get_adminpanel')))
     else:
-       resp = make_response(redirect(url_for('main.index')))
+       resp = make_response(redirect(url_for('main.search_index')))
     return resp
 
 @app.route('/logout')
 def logout():
     logout_user()
-    resp = make_response(redirect(url_for('main.index')))
+    resp = make_response(redirect(url_for('main.search_index')))
     return resp
 
 if __name__ == "__main__":
