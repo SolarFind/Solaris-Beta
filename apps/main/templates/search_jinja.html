@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Gamma SE - Found {{ total }} results{% endblock %}
+{% block title %} {{ r_name }} | SolarFind {{ total }} results{% endblock %}
 {% block head %}
     {{ super() }}
     <style>
@@ -20,7 +20,7 @@
     <div class="col s10">
       <div class="row">
         <div class="input-field col s12">
-                <input type="text" id="autocomplete-input" class="autocomplete" aria-label="{{exmp}}" name="s">
+                <input type="text" id="autocomplete-input" value="{{ r_name }}" class="autocomplete" aria-label="{{exmp}}" name="s">
                 <label for="autocomplete-input">Find something here!</label>
                 <button class="btn-floating btn-medium waves-effect waves-light red" id="search-button" type="submit"><i class="material-icons">send</i></button>
 

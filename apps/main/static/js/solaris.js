@@ -1,6 +1,9 @@
 // INIT Block {
-$(".dropdown-trigger").dropdown({constrainWidth: false,  belowOrigin: true });
+$(".dropdown-trigger").dropdown({constrainWidth: false,  belowOrigin: true, closeOnClick: false });
 // }
+ $(document).ready(function() {
+    M.updateTextFields();
+  });
 
 function notifyMe() {
   // Проверка поддержки браузером уведомлений
@@ -104,22 +107,28 @@ function searchbox() {
         try{
         var elems = document.querySelectorAll('.autocomplete');
         var instances = M.Autocomplete.init(elems, {
-            data: {
-                "Apple": null,
-                "Microsoft": null,
-                "Google": 'https://placehold.it/250x250'
-            },
+            data: {},
         });
         var instance = M.Autocomplete.getInstance(elems[0]);
         var y = $("#autocomplete-input")[0];
         console.log("y", y);
         y.oninput = function () {
-            instance.open();
-        };}catch (e) {
+            instance.open();};
+        $.getJSON("http://solarfind.net:8121/aucomp", function (valo) {
+        res = {};
+        valo.forEach(function (va) {
+           res[va]=null;
+        });
+
+        instance.updateData(res)
+        });
+        }catch (e) {
             
         }
 
     });
+
+
 }
 
 //ATTENTION TO BETA!
