@@ -22,6 +22,11 @@ page_rank = {}
 @main.route("/sw.js")
 def sw():
     return redirect("/static/js/serviceworker.js")
+
+@main.route("/liblist")
+def liblist():
+    return render_template("liblist.html")
+
 @main.route('/')
 def search_index():
     loc = str(request.accept_languages).split(",")[0]
