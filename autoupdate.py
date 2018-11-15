@@ -11,7 +11,8 @@ def gh():
     mydata = json.loads(request.data.decode())
     print(json.dumps(mydata, indent=4))
     if mydata["ref"] == "refs/heads/master":
-        system("git pull origin master")
+        system("git fetch --all")
+        system("git reset --hard origin/master")
         system("uwsgi --reload /SolarFind/PUI.pid")
     return "OK"
 
